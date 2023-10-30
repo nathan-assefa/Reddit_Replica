@@ -1,4 +1,4 @@
-interface User {
+export interface User {
   id: string;
   first_name: string;
   last_name: string;
@@ -6,6 +6,7 @@ interface User {
 }
 
 interface CommunityMembership {
+  id: string;
   created_at: string;
   updated_at: string;
   user: User;
@@ -44,6 +45,7 @@ export interface Post {
   liked_by: User[];
   loved_by: User[];
   comments: Comment[];
+  post_picture: string | null;
 }
 
 export interface Comment {
@@ -58,6 +60,9 @@ export interface Comment {
   downvoted_by: User[];
   likes: User[];
   loves: User[];
+  voted_count: number;
+  like_count: number;
+  love_count: number;
 }
 
 export interface Notification {
@@ -70,6 +75,7 @@ export interface Notification {
   content: string;
   timestamp: string;
   is_read: boolean;
+  post_id: number;
 }
 
 export interface Profile {
@@ -85,4 +91,26 @@ export interface Profile {
   phone_number: string | null;
   unread_messages_count: number;
   unread_notifications_count: number;
+  followers_count: number;
+  following_count: number;
+  bookmarks: BookMark[];
+}
+
+export interface Messages {
+  id: number;
+  created_at: string;
+  updated_at: string;
+  sender: User;
+  recipient: User;
+  content: string;
+  timestamp: string;
+  is_read: boolean;
+}
+
+export interface BookMark {
+  created_at: string;
+  updated_at: string;
+  user: User;
+  post: Post;
+  timestamp: string;
 }

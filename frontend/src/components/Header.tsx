@@ -3,26 +3,47 @@ import { useAuth } from "../contexts/AuthContext";
 import { usePostList } from "../contexts/PostListContext";
 import HomeIcon from "../icons/HomeIcon";
 import OptionIcon from "../icons/OptionIcon";
+import ProfileListIcon from "../icons/ProfileListIcon";
 import Magnifier from "../icons/Magnifier";
 import CreatePost from "../icons/CreatePost";
+import GroupIcon from "../icons/GroupIcon";
 import { AiOutlineBell } from "react-icons/ai";
-import Setting from "../icons/Setting";
 import { AiOutlineMessage } from "react-icons/ai";
 import IconBtn from "../IconButtons/HeaderIconBtn";
 import { getUserProfile } from "../utils/userProfile";
 import { Profile } from "../types";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import useCommunity from "../components/useCommunity";
+import useCommunity from "../hooks/useCommunity";
+import RecentMessages from "../services/RecentMessages";
+import AllUserProfile from "../services/AllUserProfiles";
+
+import Modal from "../components/Modal";
 
 import { ClearNotificationCount } from "../utils/notifications";
+import { ClearMessageCount } from "../utils/messages";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-// import { useEffect, useState } from "react";
 
 const Header = () => {
   const [clearNotification, setClearNotification] = useState(false);
+  const [clearMessage, setClearMessage] = useState(false);
+  const [showMessages, setShowMessages] = useState(false);
+  const [profileMenu, setProfileMenu] = useState(false);
 
   const queryClient = useQueryClient();
+
+  const clearMessageCountMutation = useMutation(() => {
+    return ClearMessageCount().then(() => setClearMessage((prev) => !prev));
+  });
+
+  const onClearMessageCount = async (): Promise<void> => {
+    try {
+      await clearMessageCountMutation.mutateAsync();
+      queryClient.invalidateQueries(["profile"]);
+    } catch (error) {
+      Promise.reject(error);
+    }
+  };
 
   const clearNotificationCountMutation = useMutation(() => {
     return ClearNotificationCount().then(() =>
@@ -52,28 +73,64 @@ const Header = () => {
   const { username, logOutUser } = useAuth();
   const [homeOption, setHomeOption] = useState(false);
   const [popular, setPopular] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { search, setSearch } = usePostList();
 
   return (
     <>
       <header>
-        <div className="user-auth">
-          {/* <Link to="/communities">Community</Link> */}
-          <div className="profile-picture"></div>
-          <div className="profile-info">
-            {username && <p>@{username}</p>}
-            {username ? (
-              <p className="logout" onClick={logOutUser}>
-                Logout
+        {username && (
+          <div className="user-auth">
+            <div className="profile-info">
+              {username && <p>@{username}</p>}
+              {profileMenu &&
+                (username ? (
+                  <div className="user-setting">
+                    <Link
+                      onClick={() => setProfileMenu(false)}
+                      to="/update_profile"
+                    >
+                      <p>Profile</p>
+                    </Link>
+                    <Link
+                      onClick={() => setProfileMenu(false)}
+                      to="/create_community"
+                    >
+                      <p>Create Community</p>
+                    </Link>
+                    <Link
+                      onClick={() => setProfileMenu(false)}
+                      to="/create_post"
+                    >
+                      <p>Create Post</p>
+                    </Link>
+                    <p className="logout" onClick={logOutUser}>
+                      Logout
+                    </p>
+                  </div>
+                ) : (
+                  <Link className="login" to="/login">
+                    Login
+                  </Link>
+                ))}
+            </div>
+            <div></div>
+            <Link to="update_profile">
+              <div
+                style={{
+                  backgroundImage: `url(${profile?.profile_picture})`,
+                }}
+                className="profile-picuture"
+              ></div>
+            </Link>
+            <div className="option-icon pf-op-icon">
+              <p onClick={() => setProfileMenu((prev) => !prev)}>
+                <ProfileListIcon />
               </p>
-            ) : (
-              <Link className="login" to="/login">
-                Login
-              </Link>
-            )}
+            </div>
           </div>
-        </div>
+        )}
         {homeOption && (
           <div className="home-drop-down">
             <p className="your-communities">Your communities</p>
@@ -100,7 +157,10 @@ const Header = () => {
             </div>
             <div className="feeds">
               <p className="feed">feeds</p>
-              <div className="homie">
+              <div
+                onClick={() => setHomeOption((prev) => !prev)}
+                className="homie"
+              >
                 <div className="home-menu-icon">
                   <HomeIcon />
                 </div>
@@ -134,72 +194,103 @@ const Header = () => {
         )}
         <div className="container">
           <Link to="/posts" className="logo">
-            Opinion sphere
+            Opinion<span>Sphere</span>
           </Link>
-          <div className="home-menu">
-            <div className="home-menu-icon">
-              <HomeIcon />
-            </div>
-            <Link to="/posts">
-              <p className="home">Home</p>
-            </Link>
+          {username && (
+            <div className="home-menu">
+              <div className="home-menu-icon">
+                <HomeIcon />
+              </div>
+              <Link to="/posts">
+                <p className="home">Home</p>
+              </Link>
 
-            <div className="option-icon">
-              <p onClick={() => setHomeOption((prev) => !prev)}>
-                <OptionIcon />
-              </p>
+              <div className="option-icon">
+                <p onClick={() => setHomeOption((prev) => !prev)}>
+                  <OptionIcon />
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="search-header">
-            <div className="magnifier">
-              <Magnifier />
+          )}
+          {username && (
+            <div className="search-header">
+              <div className="magnifier">
+                <Magnifier />
+              </div>
+              <input
+                className="search"
+                placeholder="Search Posts by Title"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
-            <input
-              className="search"
-              placeholder="Search Posts by Title"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className="header-icons">
-            <div className="icon-wrapper">
-              <div className="icon create-post-icon">
-                <Link to="create_post">
-                  <CreatePost />
+          )}
+          {username && (
+            <div className="header-icons">
+              <div className="icon-wrapper">
+                <div className="icon create-post-icon">
+                  <Link to="create_post">
+                    <CreatePost />
+                  </Link>
+                </div>
+              </div>
+              <div className="icon-wrapper">
+                <Link to="notifications">
+                  <div className="icon notification-icon">
+                    <IconBtn
+                      onClick={onClearNotificationCount}
+                      isActive={clearNotification}
+                      Icon={AiOutlineBell}
+                      aria-label="notification"
+                    >
+                      {profile?.unread_notifications_count ? (
+                        <p>{profile?.unread_notifications_count}</p>
+                      ) : (
+                        ""
+                      )}
+                    </IconBtn>
+                  </div>
                 </Link>
               </div>
-            </div>
-            <div className="icon-wrapper">
-              <Link to="notifications">
-                <div className="icon notification-icon">
+              <div
+                onClick={() => setShowMessages((prev) => !prev)}
+                className="icon-wrapper"
+              >
+                <div className="icon message-icon">
                   <IconBtn
-                    onClick={onClearNotificationCount}
-                    isActive={clearNotification}
-                    Icon={AiOutlineBell}
-                    aria-label="notification"
+                    onClick={onClearMessageCount}
+                    isActive={clearMessage}
+                    Icon={AiOutlineMessage}
+                    aria-label="message"
                   >
-                    <p>
-                      {profile?.unread_notifications_count
-                        ? profile?.unread_notifications_count
-                        : 0}
-                    </p>
+                    {profile?.unread_messages_count ? (
+                      <p>{profile?.unread_messages_count}</p>
+                    ) : (
+                      ""
+                    )}
                   </IconBtn>
                 </div>
-              </Link>
-            </div>
-            <div className="icon-wrapper">
-              <div className="icon message-icon">
-                <IconBtn Icon={AiOutlineMessage} aria-label="message">
-                  <p>2</p>
-                </IconBtn>
+              </div>
+              {showMessages && (
+                <div
+                  onClick={() => setShowMessages(false)}
+                  className="message-notification"
+                >
+                  <RecentMessages />
+                </div>
+              )}
+              <div onClick={() => setIsOpen(true)} className="icon-wrapper">
+                <div className="icon setting-icon">
+                  <GroupIcon />
+                </div>
+              </div>
+              <div className="pop-up">
+                <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+                  <AllUserProfile onClose={() => setIsOpen(false)} />
+                </Modal>
               </div>
             </div>
-            <div className="icon-wrapper">
-              <div className="icon setting-icon">
-                <Setting />
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </header>
     </>

@@ -1,0 +1,390 @@
+.profile-form-row {
+  margin-left: 3.2em;
+  margin-top: 1em;
+}
+
+label {
+  color: white;
+  font-family: "Poppins";
+}
+
+.all-about-user {
+  background: #2d2d39;
+}
+
+.profile-wrapper {
+  display: flex;
+  padding-top: 2em;
+}
+
+.middle-part {
+  width: 52%;
+}
+
+.p-header {
+  text-align: center;
+}
+
+.profile-picuture {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-image: url(../images/avatar.svg);
+  background-size: cover;
+  background-position-x: 43%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-name {
+  color: white;
+  font-size: 18px;
+  font-family: "Poppins";
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
+  text-transform: capitalize;
+}
+
+.follow-button {
+  padding: 8px 31px;
+  color: #71c6dd;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid #71c6dd;
+  border-radius: 10px;
+  background: #2d2d39;
+  cursor: pointer;
+}
+
+.unfollow-button {
+  padding: 8px 18px;
+  color: #71c6dd;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid #71c6dd;
+  border-radius: 10px;
+  background: rgb(123, 120, 120);
+  cursor: pointer;
+}
+
+.fol-msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.messaging-icon {
+  margin-left: 1em;
+  background: rgb(123, 120, 120);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  border: 2px solid #71c6dd;
+  border-radius: 10px;
+  background: #2d2d39;
+  cursor: pointer;
+}
+
+.profile-input {
+  display: block;
+  width: 50%;
+  height: 50px;
+  margin-bottom: 0.5em;
+  font-size: 16px;
+  font-family: "Poppins";
+  background: rgb(178, 171, 171);
+  border: none;
+}
+
+.profile-title {
+  width: 30%;
+  height: 50px;
+  margin-bottom: 0.5em;
+}
+
+.profile-submit {
+  border: none;
+  font-size: 16px;
+  padding: 8px 31px;
+  color: #71c6dd;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  border: none;
+  background: #525264;
+  cursor: pointer;
+}
+
+.profile-right-column {
+  background: #373744;
+  width: 270px;
+  height: auto;
+}
+
+.profile-right-column .recent-articles {
+  background: #414150;
+  height: 45px;
+  color: white;
+  text-transform: capitalize;
+  padding-left: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.user-c-lists {
+  margin-left: -1.4em;
+  margin-top: 9em;
+}
+
+.filtered-post {
+  border: 1px solid rgb(112, 106, 106);
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.pro-picture {
+  border: 1px solid #71c6dd;
+  margin-top: 1em;
+}
+
+.pro-top {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50px;
+  height: 50px;
+}
+
+.user-posts {
+  width: 70%;
+}
+
+.p-u-name {
+  color: #71c6dd;
+  text-transform: lowercase;
+  margin-left: -0.5em;
+}
+
+.p-c-date {
+  margin-left: -0.4em;
+  margin-top: -0.3em;
+}
+
+.p-c-title {
+  color: white;
+  margin-left: -0.4em;
+  margin-top: -0.01em;
+}
+
+.no-post {
+  color: white;
+  width: 90%;
+  margin-left: 0.9em;
+}
+
+.user-communities {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.com-content {
+  max-width: 50%;
+}
+
+.user-community-list {
+  margin-top: -9em;
+  width: 300px;
+  background-color: #373744;
+}
+
+.join-user-community {
+  background-color: #414150;
+  height: 45px;
+  color: white;
+  font-size: 14px;
+  font-weight: lighter;
+  text-transform: capitalize;
+  padding-left: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.user-c-name {
+  font-size: 15px;
+  width: 100%;
+}
+
+.user-c-join {
+  margin-right: 2.5em;
+  width: 30%;
+}
+
+.user-single-post {
+  margin-right: 7em;
+}
+
+.posts-list {
+  margin-left: -0.7em;
+}
+
+.more-info {
+  text-align: left;
+  margin-left: 2.7em;
+  color: rgb(112, 107, 107);
+}
+
+.see-user-info {
+  display: block;
+  margin-bottom: 0.5em;
+  padding: 8px 31px;
+  color: #71c6dd;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  border: none;
+  background: #2d2d39;
+  cursor: pointer;
+  margin-left: 1.5em;
+}
+
+.website-format span {
+  color: rgb(184, 171, 171);
+  font-size: 14px;
+}
+
+.user-profile-info {
+  margin-bottom: -1em;
+  color: #9fb6bd;
+}
+.u-bio {
+  margin-left: 3.1em;
+}
+
+.edit-user-profile {
+  padding: 8px 31px;
+  color: #71c6dd;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  border: none;
+  background: #525264;
+  cursor: pointer;
+  margin-left: 3.6em;
+}
+
+.user-participation {
+  font-weight: lighter;
+  font-family: "Poppins";
+  margin-left: 3.2em;
+  font-size: 16px;
+}
+
+.participants {
+  width: 390px;
+  height: 15%;
+  background-image: url("../images/participants.jpg");
+  background-size: cover;
+  background-position-y: 42%;
+  border-radius: 50px 50px 0 0;
+}
+
+.follow-participants {
+  color: #fefefe;
+  font-size: 19px;
+  font-family: "Poppins";
+  margin: 0.6em 1.1em;
+  text-align: left;
+  font-weight: lighter;
+  margin-bottom: 1em;
+}
+
+.participants-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.participants-picture {
+  width: 50px;
+  height: 50px;
+  background-image: url("../images/avatar.svg");
+  background-size: cover;
+  background-position-x: 30%;
+  border-radius: 50%;
+  margin-right: 1em;
+  border: 2px solid white;
+}
+
+.participat-name {
+  color: #71c6dd;
+  text-transform: lowercase;
+}
+
+.all-participants {
+  height: 620px;
+  /* overflow-y: auto;
+  scrollbar-width: none; */
+}
+
+/* .all-participants::-webkit-scrollbar {
+  display: none;
+} */
+
+.follow-info {
+  display: flex;
+  justify-content: center;
+  margin-top: -0.6em;
+  margin-bottom: 0.6em;
+}
+
+.follow-info .divider {
+  font-size: 18px;
+  margin-top: -0.4em;
+}
+
+.follow {
+  color: rgb(202, 189, 189);
+  /* font-size: 14px; */
+}
+
+.follow span {
+  color: #71c6dd;
+  font-size: 16px;
+}
+
+.post-vote-in-community {
+  background-color: #373744;
+  width: 600px;
+}
+
+.post-vote-in-community .post-content {
+  width: 92%;
+}
+.com-p-c-btn {
+  width: 150px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.c-post-vote-wrapper {
+  background: #373744;
+}
+
+.user-bookmarks {
+  margin-left: 4.5em;
+}
+
+.book-marked-posts {
+  margin-top: 2em;
+}
+
+.bookmark-post-content {
+  position: absolute;
+  background-color: black;
+  display: block;
+}

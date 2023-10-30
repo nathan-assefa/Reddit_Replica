@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SinglePost from "./SinglePost";
 import { usePostList } from "../contexts/PostListContext";
 import TopCommunities from "./TopCommunities";
+import TopUsersProfile from "./TopUserProfile";
 
 export const PostList = () => {
   const { post } = usePostList();
@@ -9,11 +10,12 @@ export const PostList = () => {
   return (
     <div className="post-wrapper">
       <div className="posts-list">
-        {post.map((p) => (
-          <div className="single-post" key={p.id}>
-            <SinglePost post={p} />
-          </div>
-        ))}
+        {post &&
+          post.map((p) => (
+            <div className="single-post" key={p.id}>
+              <SinglePost post={p} />
+            </div>
+          ))}
       </div>
       <div className="community-post">
         <div className="create-post-and-community">
@@ -31,6 +33,7 @@ export const PostList = () => {
             <button className=" buttn on-post-create">Create Post</button>
           </Link>
         </div>
+        <TopUsersProfile />
         <TopCommunities />
       </div>
     </div>

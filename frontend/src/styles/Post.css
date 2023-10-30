@@ -5,10 +5,15 @@
 .post-wrapper {
   display: flex;
   margin-left: 2em;
+  margin-top: 2em;
 }
 
 .single-post {
   display: flex;
+}
+
+.left-column {
+  margin-top: 2.5em;
 }
 
 .post-container {
@@ -20,6 +25,7 @@
   padding-top: 1em;
   padding-bottom: 1em;
   margin-left: 4em;
+  margin-top: -2.8em;
   margin-bottom: 1.2em;
   position: relative;
 }
@@ -34,6 +40,26 @@
   letter-spacing: 0.2rem;
 }
 
+.c-name-and-option {
+  display: flex;
+  align-items: center;
+}
+
+.c-name-and-option .dots {
+  margin-left: 2em;
+  margin-top: -0.5em;
+  cursor: pointer;
+}
+
+.edit-post {
+  position: absolute;
+  color: white;
+  font-size: 16px;
+  right: 1.5em;
+  top: 3em;
+  cursor: pointer;
+}
+
 .post-title {
   font-family: "IBM+Plex+Sans";
   color: white;
@@ -44,7 +70,7 @@
 
 .post-content {
   font-family: "Noto+Sans";
-  color: rgb(209, 204, 204);
+  color: rgb(229, 216, 216);
   width: 600px;
   height: auto;
   margin-left: 1.8em;
@@ -52,6 +78,14 @@
   font-weight: lighter;
   /* word-spacing: 2px; */
   letter-spacing: 0.017rem;
+}
+
+.post-picture {
+  width: 600px;
+  height: 300px;
+  margin-left: 2em;
+  margin-top: 0.5em;
+  padding-right: -5em;
 }
 
 .post-info {
@@ -92,6 +126,7 @@
   display: flex;
   align-items: center;
   margin-left: 0.58em;
+  margin-right: 1em;
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
@@ -102,9 +137,9 @@
 }
 
 .total-vote {
-  margin-top: 1em;
-  /* margin-left: 0.5em;
-  margin-right: 0.5em; */
+  margin-top: 1.2em;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
   color: #c1b6b6;
   font-family: "IBM+Plex+Sans";
   font-size: 16px;
@@ -132,12 +167,15 @@
 .comment-btn {
   border: 1px solid;
   display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid #948888;
   width: 135px;
   height: 30px;
   margin-right: 1em;
   margin-left: 2em;
   border-radius: 9px;
+  font-family: "Poppins";
 }
 
 .count-comment {
@@ -155,19 +193,23 @@
 .save-icon {
   width: 20px;
   height: 20px;
+  margin-top: -0.1em;
 }
 
 .save-btn {
   display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid #a19c9c;
   width: 90px;
   height: 30px;
   margin-right: 2em;
   border-radius: 9px;
+  font-family: "Poppins";
 }
 
 .save-btn p {
-  font-size: 16px;
+  font-size: 18px;
   color: #a19c9c;
   margin-left: 0.3em;
 }
@@ -246,7 +288,16 @@
 .community-2 {
   width: 390px;
   height: 25%;
-  background-image: url("../images/2-community.jpg");
+  background-image: url("../images/4-african-community.jpg");
+  background-size: cover;
+  background-position-y: 22%;
+  border-radius: 50px 50px 0 0;
+}
+
+.community-3 {
+  width: 390px;
+  height: 25%;
+  background-image: url("../images/3-community.jpg");
   background-size: cover;
   background-position-y: 22%;
   border-radius: 50px 50px 0 0;
@@ -273,4 +324,41 @@
   border-radius: 50%;
   bottom: 0.1em;
   right: 0.1em;
+}
+
+.love-like-btn {
+  --hue: 235;
+  --color: hsl(var(--hue), 100%, 67%);
+  padding: 0.5em 1em;
+  background: var(--color);
+  border: none;
+  color: white;
+  border-radius: 0.5em;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.love-like-btn:hover,
+.love-like-btn:focus-visible {
+  --color: hsl(var(--hue), 100%, 74%);
+}
+
+.love-like-btn.love-like-icon-btn {
+  background: none;
+  color: #c9a527;
+  padding: 0.25em;
+  display: flex;
+  align-items: center;
+  margin-bottom: -0.4em;
+}
+
+.love-like-btn[disabled] {
+  --color: hsl(var(--hue), 20%, 74%);
+}
+
+.count-footer {
+  color: rgb(198, 180, 180);
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: -0.5em;
 }
